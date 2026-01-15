@@ -1,13 +1,18 @@
-const HabitForm = ({form, handleFormChange}) => {
+const HabitForm = ({form, handleFormChange, handleFormSubmit}) => {
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        handleFormSubmit()
+    }
     return (
         <div className="add-habit-section">
             <h2>➕ Add New Habit</h2>
-            <form className="form-grid">
+            <form onSubmit={handleSubmit} className="form-grid">
                 <div className="form-group">
                     <label for="habit-name">Habit Name</label>
                     <input
                         type="text"
                         value={form.habitName}
+                        onChange={handleFormChange}
                         id="habit-name"
                         name="habitName"
                         placeholder="e.g., Morning Exercise"
@@ -20,6 +25,7 @@ const HabitForm = ({form, handleFormChange}) => {
                         <select 
                         id="frequency"
                         name="frequency"
+                        onChange={handleFormChange}
                         value={form.frequency}>
                             <option value="daily">Daily</option>
                             <option value="weekly">Weekly</option>
@@ -36,6 +42,7 @@ const HabitForm = ({form, handleFormChange}) => {
                             type="time"
                             name="notificationTime"
                             id="notification-time"
+                            onChange={handleFormChange}
                             value={form.notificationTime} />
                     </div>
                 </div>
@@ -63,7 +70,7 @@ const HabitForm = ({form, handleFormChange}) => {
                     </div>
                 </div>
 
-                <button type="button" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary">
                     Add Habit
                 </button>
             </form>
